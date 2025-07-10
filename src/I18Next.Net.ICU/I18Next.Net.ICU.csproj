@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;net6.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Company>DarkLiKally</Company>
         <Authors>DarkLiKally</Authors>
@@ -19,9 +19,9 @@
         <DocumentationFile>bin\Release\I18Next.Net.ICU.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="MessageFormat" Version="3.0.0"/>
+        <PackageReference Include="MessageFormat" Version="7.1.3" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\I18Next.Net\I18Next.Net.csproj"/>
+        <ProjectReference Include="..\I18Next.Net\I18Next.Net.csproj" />
     </ItemGroup>
 </Project>

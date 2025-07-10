@@ -8,7 +8,8 @@ public enum JsonFormat
 {
     Version1 = 1,
     Version2 = 2,
-    Version3 = 3
+    Version3 = 3,
+    Version4 = 4
 }
 
 public class DefaultPluralResolver : IPluralResolver
@@ -128,7 +129,7 @@ public class DefaultPluralResolver : IPluralResolver
 
     public string PluralSeparator { get; set; } = "_";
 
-    public JsonFormat JsonFormatVersion { get; set; } = JsonFormat.Version3;
+    public JsonFormat JsonFormatVersion { get; set; } = JsonFormat.Version4;
 
     public bool UseSimplePluralSuffixIfPossible { get; set; } = true;
 
@@ -172,13 +173,19 @@ public class DefaultPluralResolver : IPluralResolver
                 if (rule.Numbers.Length == 1 || suffix == null)
                     return string.Empty;
 
-                return $"{PluralSeparator}{suffix}";    
+                return $"{PluralSeparator}{suffix}";
 
-            default:
+            case JsonFormat.Version3:
                 if (UseSimplePluralSuffixIfPossible && rule.Numbers.Length == 2 && rule.Numbers[0] == 1)
                     return suffix == null ? string.Empty : $"{PluralSeparator}{suffix}";
                 else
                     return $"{PluralSeparator}{numberIndex}";
+
+            default:
+                if (UseSimplePluralSuffixIfPossible && rule.Numbers.Length == 2 && rule.Numbers[0] == 1)
+                    return $"{PluralSeparator}{GetSimpleVersion4Suffix(suffixNumber)}";
+                else
+                    return $"{PluralSeparator}{GetComplexVersion4Suffix(suffixNumber)}";
         }
     }
 
@@ -230,4 +237,22 @@ public class DefaultPluralResolver : IPluralResolver
 
         public int[] Numbers { get; set; }
     }
+
+    private string GetSimpleVersion4Suffix(int count)
+        => count switch
+        {
+            1 => "one",
+            _ => "other",
+        };
+
+    private string GetComplexVersion4Suffix(int count)
+        => count switch
+        {
+            0 => "zero",
+            1 => "one",
+            2 => "two",
+            >= 3 and <= 10 => "few",
+            > 10 and < 100 => "many",
+            _ => "other"
+        };
 }

@@ -26,7 +26,7 @@ public class I18NextFixture
 
         backend.AddTranslation("en", "translation", "exampleKey", "My English text.");
         backend.AddTranslation("en", "translation", "exampleKey2", "My English fallback.");
-        backend.AddTranslation("en", "translation", "exampleKey2_plural", "My English plural fallback {{count}}.");
+        backend.AddTranslation("en", "translation", "exampleKey2_other", "My English plural fallback {{count}}.");
         backend.AddTranslation("de", "translation", "exampleKey", "Mein deutscher text.");
 
         _backend = backend;

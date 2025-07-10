@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;net6.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Company>DarkLiKally</Company>
-        <Authors>DarkLiKally</Authors>
-        <PackageProjectUrl>https://github.com/DarkLiKally/I18Next.Net</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/DarkLiKally/I18Next.Net</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
         <Product>I18Next.Net</Product>
+        <Authors>Mahdi Ghorban Pour</Authors>
+        <Company>Mahdi Ghorban Pour</Company>
         <Version>1.0.0</Version>
+        <RepositoryUrl>https://github.com/mahdighorbanpour/I18Next.Net</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/mahdighorbanpour/I18Next.Net</PackageProjectUrl>
+        <PackageId>I18Next.Net.ICU.Version4</PackageId>
+        <RepositoryType>git</RepositoryType>
         <LangVersion>latest</LangVersion>
         <NoWarn>CS1591</NoWarn>
     </PropertyGroup>
@@ -19,9 +20,9 @@
         <DocumentationFile>bin\Release\I18Next.Net.ICU.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="MessageFormat" Version="3.0.0"/>
+        <PackageReference Include="MessageFormat" Version="7.1.3" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\I18Next.Net\I18Next.Net.csproj"/>
+        <ProjectReference Include="..\I18Next.Net\I18Next.Net.csproj" />
     </ItemGroup>
 </Project>

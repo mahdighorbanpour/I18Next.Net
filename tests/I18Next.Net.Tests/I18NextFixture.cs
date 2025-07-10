@@ -1,6 +1,7 @@
 using I18Next.Net.Backends;
 using I18Next.Net.Plugins;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace I18Next.Net.Tests;
 
@@ -25,7 +26,7 @@ public class I18NextFixture
 
         backend.AddTranslation("en", "translation", "exampleKey", "My English text.");
         backend.AddTranslation("en", "translation", "exampleKey2", "My English fallback.");
-        backend.AddTranslation("en", "translation", "exampleKey2_plural", "My English plural fallback {{count}}.");
+        backend.AddTranslation("en", "translation", "exampleKey2_other", "My English plural fallback {{count}}.");
         backend.AddTranslation("de", "translation", "exampleKey", "Mein deutscher text.");
 
         _backend = backend;
@@ -35,7 +36,7 @@ public class I18NextFixture
     public void English()
     {
         _i18Next.Language = "en";
-        Assert.AreEqual("My English text.", _i18Next.T("exampleKey"));
+        ClassicAssert.AreEqual("My English text.", _i18Next.T("exampleKey"));
     }
 
     [Test]
@@ -43,14 +44,14 @@ public class I18NextFixture
     {
         _i18Next.Language = "de";
         _i18Next.SetFallbackLanguages("en");
-        Assert.AreEqual("My English fallback.", _i18Next.T("exampleKey2"));
+        ClassicAssert.AreEqual("My English fallback.", _i18Next.T("exampleKey2"));
     }
 
     [Test]
     public void German()
     {
         _i18Next.Language = "de";
-        Assert.AreEqual("Mein deutscher text.", _i18Next.T("exampleKey"));
+        ClassicAssert.AreEqual("Mein deutscher text.", _i18Next.T("exampleKey"));
     }
 
     [Test]
@@ -58,7 +59,7 @@ public class I18NextFixture
     {
         _i18Next.Language = "jp";
         _i18Next.SetFallbackLanguages("en");
-        Assert.AreEqual("My English fallback.", _i18Next.T("exampleKey2"));
+        ClassicAssert.AreEqual("My English fallback.", _i18Next.T("exampleKey2"));
     }
 
     [Test]
@@ -66,7 +67,7 @@ public class I18NextFixture
     {
         _i18Next.Language = "ja";
         _i18Next.SetFallbackLanguages("en");
-        Assert.AreEqual("My English plural fallback 2.", _i18Next.T("exampleKey2", new { count = 2 }));
+        ClassicAssert.AreEqual("My English plural fallback 2.", _i18Next.T("exampleKey2", new { count = 2 }));
     }
 
     [Test]
@@ -74,13 +75,13 @@ public class I18NextFixture
     {
         _i18Next.Language = "en";
         _i18Next.SetFallbackNamespaces("translation");
-        Assert.AreEqual("My English plural fallback 2.", _i18Next.T("translation2:exampleKey2", new { count = 2 }));
+        ClassicAssert.AreEqual("My English plural fallback 2.", _i18Next.T("translation2:exampleKey2", new { count = 2 }));
     }
 
     [Test]
     public void NoFallbackLanguage_MissingTranslation_ReturnsKey()
     {
         _i18Next.Language = "de";
-        Assert.AreEqual("exampleKey2", _i18Next.T("exampleKey2"));
+        ClassicAssert.AreEqual("exampleKey2", _i18Next.T("exampleKey2"));
     }
 }

@@ -33,14 +33,14 @@ public class HierarchicalTranslationTreeBuilder : ITranslationTreeBuilder
                 else
                 {
                     var group = new Dictionary<string, object>();
-                    parentGroup.Add(part, group);
+                    parentGroup[part] = group;
                     parentGroup = group;
-                    _groups.Add(currentPath, group);
+                    _groups[currentPath] = group;
                 }
             }
         }
 
-        parentGroup.Add(parts[parts.Length - 1], text);
+        parentGroup[parts[parts.Length - 1]] = text;
     }
 
     public ITranslationTree Build()

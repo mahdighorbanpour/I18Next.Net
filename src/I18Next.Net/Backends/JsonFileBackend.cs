@@ -1,16 +1,16 @@
-﻿using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using I18Next.Net.TranslationTrees;
+﻿using I18Next.Net.TranslationTrees;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace I18Next.Net.Backends;
 
 public class JsonFileBackend : ITranslationBackend
 {
-    private readonly string _basePath;
-    private readonly ITranslationTreeBuilderFactory _treeBuilderFactory;
+    protected readonly string _basePath;
+    protected readonly ITranslationTreeBuilderFactory _treeBuilderFactory;
 
     public JsonFileBackend(string basePath)
         : this(basePath, new GenericTranslationTreeBuilderFactory<HierarchicalTranslationTreeBuilder>())
@@ -35,7 +35,7 @@ public class JsonFileBackend : ITranslationBackend
 
     public Encoding Encoding { get; set; } = Encoding.UTF8;
 
-    public async Task<ITranslationTree> LoadNamespaceAsync(string language, string @namespace)
+    public virtual async Task<ITranslationTree> LoadNamespaceAsync(string language, string @namespace)
     {
         var path = FindFile(language, @namespace);
 
@@ -47,7 +47,7 @@ public class JsonFileBackend : ITranslationBackend
         using (var streamReader = new StreamReader(path, Encoding))
         using (var reader = new JsonTextReader(streamReader))
         {
-            parsedJson = (JObject) await JToken.ReadFromAsync(reader);
+            parsedJson = (JObject)await JToken.ReadFromAsync(reader);
         }
 
         var builder = _treeBuilderFactory.Create();
@@ -57,7 +57,7 @@ public class JsonFileBackend : ITranslationBackend
         return builder.Build();
     }
 
-    private string FindFile(string language, string @namespace)
+    protected virtual string FindFile(string language, string @namespace)
     {
         var path = Path.Combine(_basePath, language, @namespace + ".json");
 
@@ -69,7 +69,7 @@ public class JsonFileBackend : ITranslationBackend
         return !File.Exists(path) ? null : path;
     }
 
-    private static void PopulateTreeBuilder(string path, JObject node, ITranslationTreeBuilder builder)
+    protected static void PopulateTreeBuilder(string path, JObject node, ITranslationTreeBuilder builder)
     {
         if (path != string.Empty)
             path = path + ".";

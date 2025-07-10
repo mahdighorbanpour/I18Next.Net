@@ -1,14 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-        <RepositoryUrl>https://github.com/DarkLiKally/I18Next.Net</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/DarkLiKally/I18Next.Net</PackageProjectUrl>
+        <Product>I18Next.Net</Product>
+        <Authors>Mahdi Ghorban Pour</Authors>
+        <Company>Mahdi Ghorban Pour</Company>
         <Version>1.0.0</Version>
-        <Authors>DarkLiKally</Authors>
+        <RepositoryUrl>https://github.com/mahdighorbanpour/I18Next.Net</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/mahdighorbanpour/I18Next.Net</PackageProjectUrl>
+        <PackageId>I18Next.Net.Serilog.Version4</PackageId>
         <RepositoryType>git</RepositoryType>
-        <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 

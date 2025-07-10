@@ -2,6 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IsPackable>true</IsPackable>
         <Product>I18Next.Net</Product>
         <Authors>Mahdi Ghorban Pour</Authors>
         <Company>Mahdi Ghorban Pour</Company>

@@ -1,12 +1,13 @@
-name: Publish NuGet Package
+name: Build & Publish NuGet Package
 
 on:
   push:
-    tags:
-      - 'v*'  # Triggers only on version tags like v1.0.0
+    branches:
+      - master
+  workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  build-test-pack-publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +17,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'  # or your preferred version
+          dotnet-version: '9.0.x'
 
       - name: Restore dependencies
         run: dotnet restore

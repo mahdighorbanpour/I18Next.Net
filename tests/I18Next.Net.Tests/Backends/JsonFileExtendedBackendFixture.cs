@@ -16,7 +16,7 @@ public class JsonFileExtendedBackendFixture
         _tree = await _backend.LoadNamespaceAsync("en-US", "test");
     }
 
-    private JsonFileBackend _backend;
+    private JsonFileExtendedBackend _backend;
     private ITranslationTree _tree;
 
     [Test]

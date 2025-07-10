@@ -20,6 +20,10 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
+      <Content Remove="TestFiles\de\testResource.json" />
+      <Content Remove="TestFiles\en-US\testResource.json" />
+    </ItemGroup>
+    <ItemGroup>
       <EmbeddedResource Include="TestFiles\de\testResource.json" />
       <EmbeddedResource Include="TestFiles\en-US\testResource.json" />
     </ItemGroup>

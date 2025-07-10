@@ -1,4 +1,5 @@
-﻿using I18Next.Net.TranslationTrees;
+﻿using I18Next.Net.Plugins;
+using I18Next.Net.TranslationTrees;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -17,15 +18,15 @@ namespace I18Next.Net.Backends;
 public class JsonFileExtendedBackend : JsonFileBackend
 {
     public JsonFileExtendedBackend(string basePath)
-        : base(basePath, new GenericTranslationTreeBuilderFactory<HierarchicalTranslationTreeBuilder>())
+        : base(basePath, new GenericTranslationTreeBuilderFactory<HierarchicalTranslationTreeBuilder>(), new DefaultPathResolver())
     {
     }
-    public JsonFileExtendedBackend(string basePath, ITranslationTreeBuilderFactory treeBuilderFactory)
-        : base(basePath, treeBuilderFactory)
+    public JsonFileExtendedBackend(string basePath, ITranslationTreeBuilderFactory treeBuilderFactory, IPathResolver pathResolver)
+        : base(basePath, treeBuilderFactory, pathResolver)
     {
     }
-    public JsonFileExtendedBackend(ITranslationTreeBuilderFactory treeBuilderFactory)
-        : base(treeBuilderFactory)
+    public JsonFileExtendedBackend(ITranslationTreeBuilderFactory treeBuilderFactory, IPathResolver pathResolver)
+        : base(treeBuilderFactory, pathResolver)
     {
     }
     public JsonFileExtendedBackend()

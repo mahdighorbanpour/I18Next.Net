@@ -1,4 +1,5 @@
-﻿using I18Next.Net.TranslationTrees;
+﻿using I18Next.Net.Plugins;
+using I18Next.Net.TranslationTrees;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
@@ -11,20 +12,22 @@ public class JsonFileBackend : ITranslationBackend
 {
     protected readonly string _basePath;
     protected readonly ITranslationTreeBuilderFactory _treeBuilderFactory;
+    protected readonly IPathResolver _pathResolver;
 
     public JsonFileBackend(string basePath)
-        : this(basePath, new GenericTranslationTreeBuilderFactory<HierarchicalTranslationTreeBuilder>())
+        : this(basePath, new GenericTranslationTreeBuilderFactory<HierarchicalTranslationTreeBuilder>(), new DefaultPathResolver())
     {
     }
 
-    public JsonFileBackend(string basePath, ITranslationTreeBuilderFactory treeBuilderFactory)
+    public JsonFileBackend(string basePath, ITranslationTreeBuilderFactory treeBuilderFactory, IPathResolver pathResolver)
     {
         _basePath = basePath;
         _treeBuilderFactory = treeBuilderFactory;
+        _pathResolver = pathResolver;
     }
 
-    public JsonFileBackend(ITranslationTreeBuilderFactory treeBuilderFactory)
-        : this("locales", treeBuilderFactory)
+    public JsonFileBackend(ITranslationTreeBuilderFactory treeBuilderFactory, IPathResolver pathResolver)
+        : this("locales", treeBuilderFactory, pathResolver)
     {
     }
 
@@ -59,12 +62,12 @@ public class JsonFileBackend : ITranslationBackend
 
     protected virtual string FindFile(string language, string @namespace)
     {
-        var path = Path.Combine(_basePath, language, @namespace + ".json");
+        var path = _pathResolver.GetPath(_basePath, language, @namespace, ".json");
 
         if (File.Exists(path))
             return path;
 
-        path = Path.Combine(_basePath, BackendUtilities.GetLanguagePart(language), @namespace + ".json");
+        path = _pathResolver.GetPathForBaseLanguage(_basePath, language, @namespace, ".json");
 
         return !File.Exists(path) ? null : path;
     }
